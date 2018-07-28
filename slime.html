@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<title>Slime</title>
+<style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      border: 0;
+      overflow: hidden; /*  Disable scrollbars */
+      display: block;  /* No floating content on sides */
+      background-color:black;
+    }
+	.img{position:absolute;z-index:1;}
+
+	#screen{
+	    margin: 0 auto; 
+	    background: black; 
+	    position:relative; 
+	    border:5px solid black; 
+	    border-radius: 10px; 
+	    box-shadow: 0 5px 50px #333}
+
+	#gameCanvas{
+	    position:relative;
+	    z-index:20;
+	}
+
+	img {
+	    opacity: 0.0;	
+	}
+
+</style>
+<body>
+<center>
+<div id = screen>
+	<img class = 'img' id = "tint" src="sprites/tint.png">
+	<canvas id="canvas" style="border:2px solid #000000;"></canvas>
+</div>
+
+
+</center>
+<script src="slime.js"></script>
+
+</body>
+</html>
