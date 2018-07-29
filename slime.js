@@ -33,10 +33,7 @@ function menuDraw() {
 
 function menuLoop() {
 	if (numLoaded > 14 && started) {
-		audio.pause();
-		audio.src = "music/chill.mp3";
-		audio.play();
-		mainLoop(); 
+		introStart(); 
 		return;
 	}
 	setTimeout(menuLoop, tickTime);
@@ -86,6 +83,7 @@ var sceneCounter = 0;
 
 
 // Game stage vars
+var introHap = false;
 var contacted = [false, false, false, false, false, false, true];
 var postTalks = false;
 var postDeaths = false;
@@ -95,6 +93,11 @@ var battle = false;
 var battleStage = 0;
 var actionMenu = false;
 var showCredits = false;
+
+// intro
+var intro = loadImage('sprites/intro.png', 130, 150);
+var wasd = loadImage('sprites/wasd.png', 470, 300);
+var space = loadImage('sprites/space.png', 380, 400);
 
 // Add player and stats
 var player = loadImage('sprites/slime.png', 600, 550);
@@ -336,6 +339,15 @@ function loadImage(name, x, y) {
 
 function loaded() {
 	numLoaded++;
+}
+
+function introStart() {
+	introHap = true;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.drawImage(intro.img, intro.xPos, intro.yPos);
+	ctx.drawImage(wasd.img, wasd.xPos, wasd.yPos);
+	ctx.drawImage(space.img, space.xPos, space.yPos);
 }
 
 // Main animation loop
@@ -1025,6 +1037,17 @@ window.onkeyup = function(e) {
 	if (!started) {
 		if (key == ' ') {
 			started = true;
+			return;
+		}
+	}
+
+	if (introHap) {
+		if (key == ' ') {
+			audio.pause();
+			audio.src = "music/chill.mp3";
+			audio.play();
+			mainLoop();
+			introHap = false;
 			return;
 		}
 	}
