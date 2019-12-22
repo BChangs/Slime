@@ -48,6 +48,7 @@ var moveSpd = 40;
 var playerBob = 0;
 var bobRate = 12;
 var credBob = 0;
+var pressed = false;
 
 // Position vars
 var treeY = 230;
@@ -1092,6 +1093,33 @@ window.onkeyup = function(e) {
 		} else {
 			if (key == ' ') {
 				contTalk++;
+			}
+		}
+	}
+}
+
+window.onkeypress = function(e) {
+	var key = e.key;
+
+	if(pressed) {
+        return;
+    }
+    pressed = true;
+    setTimeout(function() { pressed = false }, 175);
+
+	if (!cutscene) {
+		if (!talking) {
+			if (key == 'a') {
+				if (!battle) {
+					moveLeft();
+				}
+				return;
+			}
+			if (key == 'd') {
+				if (!battle) {
+					moveRight();
+				}
+				return;
 			}
 		}
 	}
